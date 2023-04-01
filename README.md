@@ -7,6 +7,11 @@ This is a simple 3D rendering engine built using C++ and OpenGL.
 - Basic 3D object rendering
 - Simple camera and transformation controls
 
+## Todo
+- Texture loading
+- 3D model loading
+- Realtime lightning
+
 ## Dependencies
 - C++11 or higher
 - OpenGL 3

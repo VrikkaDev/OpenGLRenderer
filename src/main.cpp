@@ -12,7 +12,7 @@ int main() {
 
     Transform cameraTransform = Transform();
     // Makes it so the camera doesnt spawn on 0, 0, 0
-    cameraTransform.Position += cameraTransform.Rotation.FORWARD() * 2.f;
+    cameraTransform.Position += cameraTransform.FORWARD() * 2.f;
     Camera camera = Camera(cameraTransform);
 
     // Load the vertex and fragment shaders from file
@@ -35,36 +35,38 @@ int main() {
 
         // Move camera with keyboard input
         if(window.keyboard->GetKey(GLFW_KEY_W)){
-            cameraTransform.Position += cameraTransform.Rotation.FORWARD() * -movementSpeed;
+            cameraTransform.Position += cameraTransform.FORWARD() * -movementSpeed;
         }else if(window.keyboard->GetKey(GLFW_KEY_S)){
-            cameraTransform.Position += cameraTransform.Rotation.FORWARD() * movementSpeed;
+            cameraTransform.Position += cameraTransform.FORWARD() * movementSpeed;
         }
 
         if(window.keyboard->GetKey(GLFW_KEY_A)) {
-            cameraTransform.Position += cameraTransform.Rotation.RIGHT() * -movementSpeed;
+            cameraTransform.Position += cameraTransform.RIGHT() * -movementSpeed;
         }else if(window.keyboard->GetKey(GLFW_KEY_D)){
-            cameraTransform.Position += cameraTransform.Rotation.RIGHT() * movementSpeed;
+            cameraTransform.Position += cameraTransform.RIGHT() * movementSpeed;
         }
 
         if(window.keyboard->GetKey(GLFW_KEY_E)) {
-            cameraTransform.Position += cameraTransform.Rotation.UP * movementSpeed;
+            cameraTransform.Position += cameraTransform.UP * movementSpeed;
         }else if(window.keyboard->GetKey(GLFW_KEY_Q)){
-            cameraTransform.Position += cameraTransform.Rotation.UP * -movementSpeed;
+            cameraTransform.Position += cameraTransform.UP * -movementSpeed;
         }
 
         // Change the camera yaw and pitch with keyboard input
         if(window.keyboard->GetKey(GLFW_KEY_UP)){
             pitch--;
-            cameraTransform.Rotation.SetPitch(pitch);
-        }else if(window.keyboard->GetKey(GLFW_KEY_LEFT)){
-            yaw--;
-            cameraTransform.Rotation.SetYaw(yaw);
+            cameraTransform.Rotation.x = pitch;
         }else if(window.keyboard->GetKey(GLFW_KEY_DOWN)){
             pitch++;
-            cameraTransform.Rotation.SetPitch(pitch);
+            cameraTransform.Rotation.x = pitch;
+        }
+
+        if(window.keyboard->GetKey(GLFW_KEY_LEFT)){
+            yaw--;
+            cameraTransform.Rotation.y = yaw;
         }else if(window.keyboard->GetKey(GLFW_KEY_RIGHT)){
             yaw++;
-            cameraTransform.Rotation.SetYaw(yaw);
+            cameraTransform.Rotation.y = yaw;
         }
 
         // Update the camera view matrix

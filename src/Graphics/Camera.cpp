@@ -9,12 +9,9 @@ Camera::Camera(Transform& mTransform) : m_Transform(mTransform) {
 }
 
 void Camera::UpdateView() {
-    // Set current matrix mode to modelview
-    glMatrixMode(GL_MODELVIEW);
-
     // Create rotation matrix from quaternion
     glm::mat4 matrix(1.f);
-    glm::mat3 rot = glm::mat3_cast(m_Transform.Rotation.Quaternion);
+    glm::mat3 rot = glm::mat3_cast(m_Transform.GetQuat());
 
     // Translate matrix by the inverse of camera position
     matrix = glm::translate(matrix, -m_Transform.Position);
@@ -23,19 +20,14 @@ void Camera::UpdateView() {
     m_ViewMatrix = glm::mat4(rot) * matrix;
 
     // Load view matrix to current OpenGL matrix
-    glLoadMatrixf(glm::value_ptr(m_ViewMatrix));
+    //glLoadMatrixf(glm::value_ptr(m_ViewMatrix));
 }
 
 void Camera::UpdateProjection(uint32_t width, uint32_t height) {
-    // Set current matrix mode to projection
-    glMatrixMode(GL_PROJECTION);
-
     float aspect_ratio = width/height;
 
     // Compute projection matrix using perspective projection
     m_ProjectionMatrix = glm::perspective(glm::radians(Fov), aspect_ratio, NearPlane, FarPlane);
-    // Load projection matrix to current OpenGL matrix
-    glLoadMatrixf(glm::value_ptr(m_ProjectionMatrix));
 }
 
 void Camera::RenderBackground(float r, float g, float b, float a) {
