@@ -2,8 +2,8 @@
 // Created by VrikkaDev on 31/03/2023.
 //
 
-#ifndef DUCKENGINE_1_KEYBOARD_H
-#define DUCKENGINE_1_KEYBOARD_H
+#ifndef OPENGLRENDERING_KEYBOARD_H
+#define OPENGLRENDERING_KEYBOARD_H
 
 #include "pch.h"
 
@@ -16,4 +16,4 @@ private:
 };
 
 
-#endif //DUCKENGINE_1_KEYBOARD_H
+#endif //OPENGLRENDERING_KEYBOARD_H

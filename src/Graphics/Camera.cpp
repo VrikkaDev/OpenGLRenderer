@@ -6,6 +6,15 @@
 
 Camera::Camera(Transform& mTransform) : m_Transform(mTransform) {
     UpdateProjection(Window::Instance()->GetWindowSize().x, Window::Instance()->GetWindowSize().y);
+
+    // Enable depth testing
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+
+    // Enables face culling so it doesnt render inside faces
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glFrontFace(GL_CCW);
 }
 
 void Camera::UpdateView() {

@@ -2,8 +2,8 @@
 // Created by VrikkaDev on 29/03/2023.
 //
 
-#ifndef DUCKENGINE_1_PCH_H
-#define DUCKENGINE_1_PCH_H
+#ifndef OPENGLRENDERING_PCH_H
+#define OPENGLRENDERING_PCH_H
 
 
 //OpenGL
@@ -24,7 +24,9 @@
 #include <filesystem>
 
 //others
+#include "OpenMAL/openmal/OpenMAL.h"
+
 #include "Utils/FileUtils.h"
 
 
-#endif //DUCKENGINE_1_PCH_H
+#endif //OPENGLRENDERING_PCH_H

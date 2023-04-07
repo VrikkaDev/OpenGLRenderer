@@ -30,10 +30,13 @@ void Model::Render(Transform* transform, Camera* camera) {
     m_Shader.LoadUniform("projectionMatrix", proj);
     m_Shader.LoadUniform("transformationMatrix", trans);
 
-    // Bind mesh VAO and draw
-    glBindVertexArray(m_Mesh.getVAO());
-    //(m_Mesh.GetVertexCount()*sizeof(float))
-    glDrawArrays(GL_TRIANGLES, 0, m_Mesh.GetVertexCount());
+    // Bind mesh and draw
+
+    m_Mesh.Bind();
+
+    glDrawElements(GL_TRIANGLES, m_Mesh.GetIndexCount(), GL_UNSIGNED_INT, (void*)nullptr);
+
+    m_Mesh.Unbind();
 
     // Unbind mesh VAO and shader program
     glBindVertexArray(0);

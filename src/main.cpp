@@ -5,6 +5,7 @@
 #include "Graphics/Shader.h"
 #include "Graphics/Mesh.h"
 #include "Graphics/Model.h"
+#include "Graphics/MeshLoader.h"
 
 int main() {
 
@@ -19,13 +20,13 @@ int main() {
     Shader shader = Shader("Assets/Shaders/vertex.glsl", "Assets/Shaders/fragment.glsl");
 
     // Create a cube mesh and a model with the loaded shader and mesh
-    Mesh mesh = *Mesh::CUBE();
+    Mesh mesh = *MeshLoader::LoadMesh("C:/Users/veikk/CLionProjects/OpenGLRenderer/Assets/Meshes/Knight.obj");
     Model model = Model(mesh, shader);
 
     Transform* modelTransform = new Transform();
 
     // Set the movement speed for the camera
-    float movementSpeed = 0.05f;
+    float movementSpeed;
     float yaw = 0.f, pitch = 0.f;
 
     // Run the game loop
@@ -34,6 +35,8 @@ int main() {
         camera.RenderBackground(0.5f, 0.3f, 0.3f, 1.0f);
 
         // Move camera with keyboard input
+        movementSpeed = window.keyboard->GetKey(GLFW_KEY_LEFT_SHIFT) ? 0.05f : 0.01f;
+
         if(window.keyboard->GetKey(GLFW_KEY_W)){
             cameraTransform.Position += cameraTransform.FORWARD() * -movementSpeed;
         }else if(window.keyboard->GetKey(GLFW_KEY_S)){

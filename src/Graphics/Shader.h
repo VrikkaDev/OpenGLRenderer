@@ -2,8 +2,8 @@
 // Created by VrikkaDev on 29/03/2023.
 //
 
-#ifndef DUCKENGINE_1_SHADER_H
-#define DUCKENGINE_1_SHADER_H
+#ifndef OPENGLRENDERING_SHADER_H
+#define OPENGLRENDERING_SHADER_H
 
 #include "pch.h"
 
@@ -38,4 +38,4 @@ protected:
 };
 
 
-#endif //DUCKENGINE_1_SHADER_H
+#endif //OPENGLRENDERING_SHADER_H
