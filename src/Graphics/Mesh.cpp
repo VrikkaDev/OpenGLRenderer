@@ -20,7 +20,7 @@ Mesh::Mesh(const std::vector<float>& vertices, const std::vector<uint32_t>& indi
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], GL_STATIC_DRAW);
 
-    // Store the number of vertices in the vertex count variable
+    // Store the number of vertices and indices in the vertex count variable
     m_VertexCount = (vertices.size()*sizeof(float));
     m_IndexCount = indices.size();
 

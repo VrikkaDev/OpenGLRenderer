@@ -31,14 +31,11 @@ void Model::Render(Transform* transform, Camera* camera) {
     m_Shader.LoadUniform("transformationMatrix", trans);
 
     // Bind mesh and draw
-
     m_Mesh.Bind();
 
     glDrawElements(GL_TRIANGLES, m_Mesh.GetIndexCount(), GL_UNSIGNED_INT, (void*)nullptr);
 
+    // Unbind mesh and shader program
     m_Mesh.Unbind();
-
-    // Unbind mesh VAO and shader program
-    glBindVertexArray(0);
     m_Shader.UnBind();
 }

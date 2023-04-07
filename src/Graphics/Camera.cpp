@@ -27,9 +27,6 @@ void Camera::UpdateView() {
 
     // Compute view matrix by multiplying rotation and translation matrices
     m_ViewMatrix = glm::mat4(rot) * matrix;
-
-    // Load view matrix to current OpenGL matrix
-    //glLoadMatrixf(glm::value_ptr(m_ViewMatrix));
 }
 
 void Camera::UpdateProjection(uint32_t width, uint32_t height) {

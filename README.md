@@ -5,11 +5,11 @@ This is a simple 3D rendering engine built using C++ and OpenGL.
 - Window and input management using GLFW
 - Modern OpenGL rendering pipeline
 - Basic 3D object rendering
+- 3D model loading from file
 - Simple camera and transformation controls
 
 ## Todo
 - Texture loading
-- 3D model loading
 - Realtime lightning
 
 ## Dependencies
@@ -18,6 +18,7 @@ This is a simple 3D rendering engine built using C++ and OpenGL.
 - GLFW3
 - GLM
 - Glad
+- OpenMAL
 
 ## Building
 To build the project run:
