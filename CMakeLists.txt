@@ -7,7 +7,7 @@ project(openglrendering)
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(CMAKE_MODULE_PATH "cmke")
+set(CMAKE_MODULE_PATH "cmake")
 include(CMake/cotire.cmake)
 
 set(OpenGL_GL_PREFERENCE GLVND)
@@ -18,6 +18,7 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 add_subdirectory("vendor/glfw")
 add_subdirectory("vendor/glm")
 add_subdirectory("vendor/glad")
+add_subdirectory("vendor/OpenMAL")
 
 
 find_package(OpenGL REQUIRED)

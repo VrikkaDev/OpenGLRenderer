@@ -2,8 +2,8 @@
 // Created by VrikkaDev on 30/03/2023.
 //
 
-#ifndef DUCKENGINE_1_TRANSFORM_H
-#define DUCKENGINE_1_TRANSFORM_H
+#ifndef OPENGLRENDERING_TRANSFORM_H
+#define OPENGLRENDERING_TRANSFORM_H
 
 #include "pch.h"
 
@@ -23,4 +23,4 @@ public:
 };
 
 
-#endif //DUCKENGINE_1_TRANSFORM_H
+#endif //OPENGLRENDERING_TRANSFORM_H

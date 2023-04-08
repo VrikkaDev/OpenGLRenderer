@@ -4,10 +4,11 @@
 
 #include "Mesh.h"
 
-Mesh::Mesh(const std::vector<float>& vertices) {
+Mesh::Mesh(const std::vector<float>& vertices, const std::vector<uint32_t>& indices) {
     // Generate a VAO and VBO
     glGenVertexArrays(1, &m_VAO);
     glGenBuffers(1, &m_VBO);
+    glGenBuffers(1, &m_EBO);
 
     // Bind the VAO to configure it
     glBindVertexArray(m_VAO);
@@ -16,9 +17,12 @@ Mesh::Mesh(const std::vector<float>& vertices) {
     glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
     glBufferData(GL_ARRAY_BUFFER, (long)(vertices.size()*sizeof(float)), vertices.data(), GL_STATIC_DRAW);
 
-    // Store the number of vertices in the vertex count variable
-    m_VertexCount = (vertices.size()*sizeof(float));
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], GL_STATIC_DRAW);
 
+    // Store the number of vertices and indices in the vertex count variable
+    m_VertexCount = (vertices.size()*sizeof(float));
+    m_IndexCount = indices.size();
 
     // Specify how the vertex data is stored in the VBO
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)nullptr);
@@ -29,45 +33,12 @@ Mesh::Mesh(const std::vector<float>& vertices) {
     glBindVertexArray(0);
 }
 
-Mesh* Mesh::CUBE() {
-    std::vector<float> vertices ={
-            -1.0f,-1.0f,-1.0f, // triangle 1 : begin
-            -1.0f,-1.0f, 1.0f,
-            -1.0f, 1.0f, 1.0f, // triangle 1 : end
-            1.0f, 1.0f,-1.0f, // triangle 2 : begin
-            -1.0f,-1.0f,-1.0f,
-            -1.0f, 1.0f,-1.0f, // triangle 2 : end
-            1.0f,-1.0f, 1.0f,
-            -1.0f,-1.0f,-1.0f,
-            1.0f,-1.0f,-1.0f,
-            1.0f, 1.0f,-1.0f,
-            1.0f,-1.0f,-1.0f,
-            -1.0f,-1.0f,-1.0f,
-            -1.0f,-1.0f,-1.0f,
-            -1.0f, 1.0f, 1.0f,
-            -1.0f, 1.0f,-1.0f,
-            1.0f,-1.0f, 1.0f,
-            -1.0f,-1.0f, 1.0f,
-            -1.0f,-1.0f,-1.0f,
-            -1.0f, 1.0f, 1.0f,
-            -1.0f,-1.0f, 1.0f,
-            1.0f,-1.0f, 1.0f,
-            1.0f, 1.0f, 1.0f,
-            1.0f,-1.0f,-1.0f,
-            1.0f, 1.0f,-1.0f,
-            1.0f,-1.0f,-1.0f,
-            1.0f, 1.0f, 1.0f,
-            1.0f,-1.0f, 1.0f,
-            1.0f, 1.0f, 1.0f,
-            1.0f, 1.0f,-1.0f,
-            -1.0f, 1.0f,-1.0f,
-            1.0f, 1.0f, 1.0f,
-            -1.0f, 1.0f,-1.0f,
-            -1.0f, 1.0f, 1.0f,
-            1.0f, 1.0f, 1.0f,
-            -1.0f, 1.0f, 1.0f,
-            1.0f,-1.0f, 1.0f
-    };
+void Mesh::Bind() const {
+    glBindVertexArray(m_VAO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
+}
 
-    return new Mesh(vertices);
+void Mesh::Unbind() const {
+    glBindVertexArray(0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }

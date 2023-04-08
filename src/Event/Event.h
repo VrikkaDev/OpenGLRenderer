@@ -2,8 +2,8 @@
 // Created by VrikkaDev on 30/03/2023.
 //
 
-#ifndef DUCKENGINE_1_EVENT_H
-#define DUCKENGINE_1_EVENT_H
+#ifndef OPENGLRENDERING_EVENT_H
+#define OPENGLRENDERING_EVENT_H
 
 #include "pch.h"
 
@@ -22,4 +22,4 @@ public:
     static std::vector<WindowEvent*> m_WRecievers;
 };
 
-#endif //DUCKENGINE_1_EVENT_H
+#endif //OPENGLRENDERING_EVENT_H

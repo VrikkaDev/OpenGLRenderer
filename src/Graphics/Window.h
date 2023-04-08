@@ -2,8 +2,8 @@
 // Created by VrikkaDev on 29/03/2023.
 //
 
-#ifndef DUCKENGINE_1_WINDOW_H
-#define DUCKENGINE_1_WINDOW_H
+#ifndef OPENGLRENDERING_WINDOW_H
+#define OPENGLRENDERING_WINDOW_H
 
 #include "pch.h"
 #include "Event/Event.h"
@@ -35,4 +35,4 @@ private:
 };
 
 
-#endif //DUCKENGINE_1_WINDOW_H
+#endif //OPENGLRENDERING_WINDOW_H

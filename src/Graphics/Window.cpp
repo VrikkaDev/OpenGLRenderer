@@ -77,6 +77,7 @@ void Window::key_callback(GLFWwindow* m_Window, int key, int scancode, int actio
 
 void Window::resize_callback(GLFWwindow* window, int w, int h) {
     Instance()->m_WindowSize = {w,h};
+    glViewport(0, 0, w, h);
     // Dispatches the OnWindowResize event to the event receivers
     WindowEventDispatcher::DispatchWindowResize(window, w, h);
 }

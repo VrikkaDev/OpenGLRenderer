@@ -2,8 +2,8 @@
 // Created by VrikkaDev on 30/03/2023.
 //
 
-#ifndef DUCKENGINE_1_CAMERA_H
-#define DUCKENGINE_1_CAMERA_H
+#ifndef OPENGLRENDERING_CAMERA_H
+#define OPENGLRENDERING_CAMERA_H
 
 #include "pch.h"
 #include "Transform.h"
@@ -38,4 +38,4 @@ private:
 };
 
 
-#endif //DUCKENGINE_1_CAMERA_H
+#endif //OPENGLRENDERING_CAMERA_H

@@ -6,6 +6,15 @@
 
 Camera::Camera(Transform& mTransform) : m_Transform(mTransform) {
     UpdateProjection(Window::Instance()->GetWindowSize().x, Window::Instance()->GetWindowSize().y);
+
+    // Enable depth testing
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+
+    // Enables face culling so it doesnt render inside faces
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glFrontFace(GL_CCW);
 }
 
 void Camera::UpdateView() {
@@ -18,9 +27,6 @@ void Camera::UpdateView() {
 
     // Compute view matrix by multiplying rotation and translation matrices
     m_ViewMatrix = glm::mat4(rot) * matrix;
-
-    // Load view matrix to current OpenGL matrix
-    //glLoadMatrixf(glm::value_ptr(m_ViewMatrix));
 }
 
 void Camera::UpdateProjection(uint32_t width, uint32_t height) {
