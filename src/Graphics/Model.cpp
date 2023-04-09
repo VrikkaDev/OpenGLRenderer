@@ -4,12 +4,12 @@
 
 #include "Model.h"
 
-Model::Model(Mesh& mesh, Shader& shader) : m_Mesh(mesh), m_Shader(shader){
+Model::Model(Mesh& mesh, Material& material) : m_Mesh(mesh), m_Material(material){
 }
 
 void Model::Render(Transform* transform, Camera* camera) {
     // Bind the shader program for rendering
-    m_Shader.Bind();
+    m_Material.shader.Bind();
 
     // Create transformation matrix
     glm::mat4 matrix = transform->CreateTransformationMatrix();
@@ -26,9 +26,9 @@ void Model::Render(Transform* transform, Camera* camera) {
     auto trans = matrix;
 
     // Load the matrices to the shader
-    m_Shader.LoadUniform("viewMatrix", view);
-    m_Shader.LoadUniform("projectionMatrix", proj);
-    m_Shader.LoadUniform("transformationMatrix", trans);
+    m_Material.shader.LoadUniform("viewMatrix", view);
+    m_Material.shader.LoadUniform("projectionMatrix", proj);
+    m_Material.shader.LoadUniform("transformationMatrix", trans);
 
     // Bind mesh and draw
     m_Mesh.Bind();
@@ -37,5 +37,5 @@ void Model::Render(Transform* transform, Camera* camera) {
 
     // Unbind mesh and shader program
     m_Mesh.Unbind();
-    m_Shader.UnBind();
+    m_Material.shader.UnBind();
 }

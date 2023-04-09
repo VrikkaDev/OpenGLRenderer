@@ -1,3 +1,4 @@
+#define STB_IMAGE_IMPLEMENTATION
 #include "pch.h"
 #include "Graphics/Window.h"
 #include "Transform.h"
@@ -16,12 +17,12 @@ int main() {
     cameraTransform.Position += cameraTransform.FORWARD() * 2.f;
     Camera camera = Camera(cameraTransform);
 
-    // Load the vertex and fragment shaders from file
-    Shader shader = Shader("Assets/Shaders/vertex.glsl", "Assets/Shaders/fragment.glsl");
+    // Create Material variable for the model
+    Material material = Material();
 
     // Create a cube mesh and a model with the loaded shader and mesh
-    Mesh mesh = *MeshLoader::LoadMesh("C:/Users/veikk/CLionProjects/OpenGLRenderer/Assets/Meshes/Knight.obj");
-    Model model = Model(mesh, shader);
+    Mesh mesh = *MeshLoader::LoadMesh("../Assets/Meshes/Knight.obj");
+    Model model = Model(mesh, material);
 
     Transform* modelTransform = new Transform();
 

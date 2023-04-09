@@ -10,14 +10,15 @@
 #include "Shader.h"
 #include "Transform.h"
 #include "Camera.h"
+#include "Material.h"
 
 class Model {
 public:
-    Model(Mesh &mesh, Shader &shader);
+    Model(Mesh& mesh, Material& material);
     void Render(Transform* transform, Camera* camera);
 private:
     Mesh& m_Mesh;
-    Shader& m_Shader;
+    Material& m_Material;
 };
 
 

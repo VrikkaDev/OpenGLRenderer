@@ -25,6 +25,7 @@
 
 //others
 #include "OpenMAL/openmal/OpenMAL.h"
+#include "stb/stb_image.h"
 
 #include "Utils/FileUtils.h"
 

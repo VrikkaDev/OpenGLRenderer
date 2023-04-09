@@ -19,7 +19,7 @@ add_subdirectory("vendor/glfw")
 add_subdirectory("vendor/glm")
 add_subdirectory("vendor/glad")
 add_subdirectory("vendor/OpenMAL")
-
+add_subdirectory("vendor/stb")
 
 find_package(OpenGL REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIRS})
