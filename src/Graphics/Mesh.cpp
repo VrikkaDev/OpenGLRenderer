@@ -4,7 +4,7 @@
 
 #include "Mesh.h"
 
-Mesh::Mesh(const std::vector<float>& vertices, const std::vector<uint32_t>& indices) {
+Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices) {
     // Generate a VAO and VBO
     glGenVertexArrays(1, &m_VAO);
     glGenBuffers(1, &m_VBO);
@@ -15,18 +15,22 @@ Mesh::Mesh(const std::vector<float>& vertices, const std::vector<uint32_t>& indi
 
     // Bind the VBO to set the vertices data in it and allocate memory using glBufferData function with GL_STATIC_DRAW usage.
     glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-    glBufferData(GL_ARRAY_BUFFER, (long)(vertices.size()*sizeof(float)), vertices.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, (long)(vertices.size()*sizeof(Vertex)), vertices.data(), GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], GL_STATIC_DRAW);
 
     // Store the number of vertices and indices in the vertex count variable
-    m_VertexCount = (vertices.size()*sizeof(float));
+    m_VertexCount = (vertices.size()*sizeof(Vertex));
     m_IndexCount = indices.size();
 
     // Specify how the vertex data is stored in the VBO
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)nullptr);
     glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, position));
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, normal));
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, texcoord));
 
     // Unbind the VBO and VAO to prevent modification of their data outside this constructor
     glBindBuffer(GL_ARRAY_BUFFER, 0);

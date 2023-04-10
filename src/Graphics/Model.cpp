@@ -25,6 +25,9 @@ void Model::Render(Transform* transform, Camera* camera) {
     auto proj = camera->GetProjectionMatrix();
     auto trans = matrix;
 
+    // Load the material variables to shader
+    m_Material.LoadToShader();
+
     // Load the matrices to the shader
     m_Material.shader.LoadUniform("viewMatrix", view);
     m_Material.shader.LoadUniform("projectionMatrix", proj);

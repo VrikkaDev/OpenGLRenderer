@@ -16,6 +16,8 @@ public:
     void Bind() const;
     void UnBind() const;
 
+    int GetLocation(const char* name) const;
+
     void LoadInt(int location, GLint value);
     void LoadFloat(int location, GLfloat value);
 

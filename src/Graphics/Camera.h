@@ -13,7 +13,7 @@ class Camera : public WindowEvent{
 public:
     explicit Camera(Transform& mTransform);
 
-    float Fov = 80, NearPlane = 0.1, FarPlane = 1000;
+    float Fov = 80, NearPlane = 0.00001, FarPlane = 1000;
 
     void UpdateView();
     void UpdateProjection(uint32_t width, uint32_t height);

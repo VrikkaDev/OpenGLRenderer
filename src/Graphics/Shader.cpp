@@ -136,3 +136,7 @@ void Shader::GetUniforms() {
     // Unbind the shader program
     this->UnBind();
 }
+
+int Shader::GetLocation(const char* name) const {
+    return glGetUniformLocation(m_ShaderProgram ,name);
+}

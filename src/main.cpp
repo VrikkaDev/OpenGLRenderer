@@ -7,6 +7,7 @@
 #include "Graphics/Mesh.h"
 #include "Graphics/Model.h"
 #include "Graphics/MeshLoader.h"
+#include "Graphics/Light.h"
 
 int main() {
 
@@ -17,6 +18,12 @@ int main() {
     cameraTransform.Position += cameraTransform.FORWARD() * 2.f;
     Camera camera = Camera(cameraTransform);
 
+    // Create light with transform and color
+    Transform lightTransform = Transform();
+    lightTransform.Position.y += 2;
+    glm::vec3 lightColor = {1.f,0.2f,0.5f};
+    CubeLight light = CubeLight(lightTransform, lightColor);
+
     // Create Material variable for the model
     Material material = Material();
 
@@ -26,6 +33,12 @@ int main() {
 
     Transform* modelTransform = new Transform();
 
+    Mesh mesh2 = *MeshLoader::LoadMesh("../Assets/Meshes/kinghhhht.obj");
+    Model model2 = Model(mesh2, material);
+
+    Transform* model2transform = new Transform();
+    model2transform ->Position.x = 5;
+
     // Set the movement speed for the camera
     float movementSpeed;
     float yaw = 0.f, pitch = 0.f;
@@ -33,7 +46,7 @@ int main() {
     // Run the game loop
     while(window.IsRunning){
         // Render a background color
-        camera.RenderBackground(0.5f, 0.3f, 0.3f, 1.0f);
+        camera.RenderBackground(0.1f, 0.7f, 0.6f, 1.0f);
 
         // Move camera with keyboard input
         movementSpeed = window.keyboard->GetKey(GLFW_KEY_LEFT_SHIFT) ? 0.05f : 0.01f;
@@ -77,6 +90,7 @@ int main() {
         camera.UpdateView();
         // Render the model with the current transform and camera
         model.Render(modelTransform, &camera);
+        model2.Render(model2transform, &camera);
 
         // Swap the front and back buffers of the window to display the rendered frame
         window.SwapBuffers();
