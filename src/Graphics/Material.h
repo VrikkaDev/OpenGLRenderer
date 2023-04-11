@@ -17,11 +17,12 @@ public:
     glm::vec3 diffuse = {0.5f, 0.5f, 0.5f};
     glm::vec3 specular = {1.0f, 1.0f, 1.0f};
     float shininess = 32.0f;
-    std::optional<Texture> texture;
+    Texture texture = Texture("../Assets/Textures/white.png");
     Shader shader = Shader("Assets/Shaders/vertex.glsl", "Assets/Shaders/fragment.glsl");
-    virtual void LoadToShader();
+    virtual void Bind();
+    void UnBind() const;
 private:
-    int m_LocationAmbient = 0, m_LocationDiffuse = 0, m_LocationSpecular = 0, m_LocationShininess = 0;
+    int m_LocationAmbient = 0, m_LocationDiffuse = 0, m_LocationSpecular = 0, m_LocationShininess = 0, m_LocationTexture = 0;
 };
 
 

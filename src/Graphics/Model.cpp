@@ -26,7 +26,7 @@ void Model::Render(Transform* transform, Camera* camera) {
     auto trans = matrix;
 
     // Load the material variables to shader
-    m_Material.LoadToShader();
+    m_Material.Bind();
 
     // Load the matrices to the shader
     m_Material.shader.LoadUniform("viewMatrix", view);
@@ -38,7 +38,8 @@ void Model::Render(Transform* transform, Camera* camera) {
 
     glDrawElements(GL_TRIANGLES, m_Mesh.GetIndexCount(), GL_UNSIGNED_INT, (void*)nullptr);
 
-    // Unbind mesh and shader program
-    m_Mesh.Unbind();
+    // UnBind mesh, material and shader program
+    m_Mesh.UnBind();
+    m_Material.UnBind();
     m_Material.shader.UnBind();
 }

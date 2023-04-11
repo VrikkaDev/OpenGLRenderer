@@ -18,7 +18,7 @@ public:
     uint32_t getVAO() const{return m_VAO;}
 
     void Bind() const;
-    void Unbind() const;
+    void UnBind() const;
 private:
     uint32_t m_VAO = 0, m_VBO = 0, m_EBO;
     uint32_t m_VertexCount = 0, m_IndexCount = 0;

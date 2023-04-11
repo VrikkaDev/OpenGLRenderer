@@ -133,7 +133,7 @@ void Shader::GetUniforms() {
     m_LocationProjectionMatrix = glGetUniformLocation(m_ShaderProgram, "projectionMatrix");
     m_LocationViewMatrix = glGetUniformLocation(m_ShaderProgram, "viewMatrix");
     m_LocationTransformationMatrix = glGetUniformLocation(m_ShaderProgram, "transformationMatrix");
-    // Unbind the shader program
+    // UnBind the shader program
     this->UnBind();
 }
 

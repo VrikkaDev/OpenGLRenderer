@@ -13,7 +13,7 @@ out vec2 TexCoord;
 
 void main()
 {
+    gl_Position = projectionMatrix * viewMatrix * transformationMatrix * vec4(aPos, 1.0);
     Normal = aNormal;
     TexCoord = vec2(aTexCoord.x, aTexCoord.y);
-    gl_Position = projectionMatrix * viewMatrix * transformationMatrix * vec4(aPos, 1.0);
 }

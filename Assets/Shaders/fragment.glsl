@@ -5,6 +5,7 @@ struct Material{
     vec3 diffuse;
     vec3 specular;
     float shininess;
+    sampler2D modeltexture;
 };
 
 struct Light{
@@ -22,9 +23,5 @@ out vec4 FragColor;
 
 void main()
 {
-    float r, g, b;
-    r = (gl_PrimitiveID % 256) / 255.0f;
-    g = ((gl_PrimitiveID / 256) % 256) / 255.0f;
-    b = ((gl_PrimitiveID / (256 * 256)) % 256) / 255.0f;
-    FragColor = vec4(r,g,b, 1.0);
+    FragColor = texture(material.modeltexture, TexCoord) * vec4(1.0f, 1.0f, 1.0f, 1.0f);
 }

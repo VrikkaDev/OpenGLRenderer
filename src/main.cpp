@@ -26,6 +26,8 @@ int main() {
 
     // Create Material variable for the model
     Material material = Material();
+    Texture texture = Texture("../Assets/Textures/smiley.png");
+    material.texture = texture;
 
     // Create a cube mesh and a model with the loaded shader and mesh
     Mesh mesh = *MeshLoader::LoadMesh("../Assets/Meshes/Knight.obj");
@@ -33,8 +35,9 @@ int main() {
 
     Transform* modelTransform = new Transform();
 
+    Material material2 = Material();
     Mesh mesh2 = *MeshLoader::LoadMesh("../Assets/Meshes/kinghhhht.obj");
-    Model model2 = Model(mesh2, material);
+    Model model2 = Model(mesh2, material2);
 
     Transform* model2transform = new Transform();
     model2transform ->Position.x = 5;
