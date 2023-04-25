@@ -53,6 +53,7 @@ namespace OpenMAL {
                 model->indices.push_back(i * 3 + 2);
             }
 
+
             return model;
         }
     };

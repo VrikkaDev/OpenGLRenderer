@@ -15,6 +15,10 @@ namespace OpenMAL{
                 float array[2];
             };
         };
+
+        bool operator==(const Vec2& other) const {
+            return x == other.x && y == other.y;
+        }
     };
 
     struct Vec3{
@@ -26,6 +30,10 @@ namespace OpenMAL{
                 float array[3];
             };
         };
+
+        bool operator==(const Vec3& other) const {
+            return x == other.x && y == other.y && z == other.z;
+        }
     };
 
     static inline Vec3 read_vec3(const char* buffer) {

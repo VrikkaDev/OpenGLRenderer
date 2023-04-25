@@ -24,23 +24,22 @@ int main() {
     glm::vec3 lightColor = {1.f,0.2f,0.5f};
     CubeLight light = CubeLight(lightTransform, lightColor);
 
-    // Create Material variable for the model
-    Material material = Material();
-    Texture texture = Texture("../Assets/Textures/smiley.png");
-    material.texture = texture;
-
     // Create a cube mesh and a model with the loaded shader and mesh
     Mesh mesh = *MeshLoader::LoadMesh("../Assets/Meshes/Knight.obj");
+    Material material = Material();
     Model model = Model(mesh, material);
 
     Transform* modelTransform = new Transform();
+    modelTransform->Position.x += -1;
 
+    Mesh mesh2 = *MeshLoader::LoadMesh("../Assets/Meshes/CubeO.obj");
     Material material2 = Material();
-    Mesh mesh2 = *MeshLoader::LoadMesh("../Assets/Meshes/kinghhhht.obj");
+    Texture texture = Texture("../Assets/Textures/CubeFaces.png");
+    material2.texture = texture;
     Model model2 = Model(mesh2, material2);
 
     Transform* model2transform = new Transform();
-    model2transform ->Position.x = 5;
+    model2transform ->Position.x = 0;
 
     // Set the movement speed for the camera
     float movementSpeed;

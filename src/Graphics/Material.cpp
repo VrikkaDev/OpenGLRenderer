@@ -19,9 +19,10 @@ Material::Material() {
     m_LocationSpecular = shader.GetLocation("material.specular");
     m_LocationShininess = shader.GetLocation("material.shininess");
 
-    m_LocationTexture = shader.GetLocation("material.modeltexture");
+    m_LocationTexture = shader.GetLocation("modeltexture");
 }
 
 void Material::UnBind() const {
     texture.Unbind();
+    shader.UnBind();
 }

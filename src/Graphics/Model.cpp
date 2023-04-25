@@ -41,5 +41,4 @@ void Model::Render(Transform* transform, Camera* camera) {
     // UnBind mesh, material and shader program
     m_Mesh.UnBind();
     m_Material.UnBind();
-    m_Material.shader.UnBind();
 }

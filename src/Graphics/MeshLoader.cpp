@@ -10,13 +10,13 @@ std::unique_ptr<Mesh> MeshLoader::LoadMesh(const char* filepath) {
     auto malmodel = OpenMAL::ModelLoader::LoadModel(filepath);
 
     std::vector<Vertex> vertices;
-    vertices.resize(malmodel ->positions.size(), Vertex());
 
-    for (size_t i = 0; i < vertices.size(); ++i)
-    {
-        vertices[i].position = glm::make_vec3(malmodel->positions[i].array);
-        vertices[i].normal = glm::make_vec3(malmodel->normals[i].array);
-        vertices[i].texcoord = glm::make_vec2(malmodel->texcoords[i].array);
+    for(auto vert : malmodel->vertices){
+        Vertex vertex{};
+        vertex.position = glm::make_vec3(vert.position.array);
+        vertex.normal = glm::make_vec3(vert.normal.array);
+        vertex.texcoord = glm::make_vec2(vert.texcoord.array);
+        vertices.push_back(vertex);
     }
 
     // Create unique_ptr of the mesh

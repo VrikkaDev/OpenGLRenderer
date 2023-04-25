@@ -12,21 +12,17 @@
 #include "OpenMAL/openmal/Model.h"
 
 namespace OpenMAL{
+
     class ObjLoader{
     public:
         static std::unique_ptr<Model> Load(const char* filepath){
+
             std::ifstream file(filepath);
             if (!file.is_open()) {
                 std::cerr << "Failed to open OBJ file: " << filepath << std::endl;
                 return nullptr;
             }
-
             std::unique_ptr<Model> model = std::make_unique<Model>();
-
-            std::vector<Vec3> positions;
-            std::vector<Vec3> normals;
-            std::vector<Vec2> texcoords;
-            std::vector<unsigned int> indices;
 
             std::string line;
             while (std::getline(file, line)) {
@@ -35,35 +31,49 @@ namespace OpenMAL{
                 iss >> type;
 
                 if (type == "v") {
-                    Vec3 position{};
+                    Vec3 position;
                     iss >> position.x >> position.y >> position.z;
-                    positions.push_back(position);
-                }
-                else if (type == "vn") {
-                    Vec3 normal{};
+                    model->positions.push_back(position);
+                } else if (type == "vn") {
+                    Vec3 normal;
                     iss >> normal.x >> normal.y >> normal.z;
-                    normals.push_back(normal);
-                }
-                else if (type == "vt") {
-                    Vec2 texcoord{};
+                    model->normals.push_back(normal);
+                } else if (type == "vt") {
+                    Vec2 texcoord;
                     iss >> texcoord.x >> texcoord.y;
-                    texcoords.push_back(texcoord);
-                }
-                else if (type == "f") {
-                    unsigned int position_index, texcoord_index, normal_index;
-                    char slash;
+                    model->texcoords.push_back(texcoord);
+                } else if (type == "f") {
+                    std::vector<std::string> tokens;
+                    std::string token;
+                    while (iss >> token) {
+                        tokens.push_back(token);
+                    }
+
+                    if (tokens.size() != 3) {
+                        std::cerr << "Invalid face: " << line << std::endl;
+                        continue;
+                    }
+
                     for (int i = 0; i < 3; i++) {
-                        iss >> position_index >> slash >> texcoord_index >> slash >> normal_index;
-                        indices.push_back(position_index - 1);
+                        unsigned int position_index, texcoord_index, normal_index;
+                        std::sscanf(tokens[i].c_str(), "%u/%u/%u", &position_index,
+                                    &texcoord_index, &normal_index);
+
+                        Vertex vertex{};
+                        vertex.position = model->positions[position_index - 1];
+                        vertex.normal = model->normals[normal_index - 1];
+                        vertex.texcoord = model->texcoords[texcoord_index - 1];
+
+                        auto it = std::find(model->vertices.begin(), model->vertices.end(), vertex);
+                        if (it != model->vertices.end()) {
+                            model->indices.push_back(std::distance(model->vertices.begin(), it));
+                        } else {
+                            model->vertices.push_back(vertex);
+                            model->indices.push_back(model->vertices.size() - 1);
+                        }
                     }
                 }
             }
-
-            // Copy vertex data from temporary vectors into model struct
-            model->positions = positions;
-            model->normals = normals;
-            model->texcoords = texcoords;
-            model->indices = indices;
 
             return model;
         }

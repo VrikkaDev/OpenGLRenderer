@@ -20,7 +20,7 @@ public:
     void Bind() const;
     void UnBind() const;
 private:
-    uint32_t m_VAO = 0, m_VBO = 0, m_EBO;
+    uint32_t m_VAO = 0, m_VBO = 0, m_EBO = 0;
     uint32_t m_VertexCount = 0, m_IndexCount = 0;
 };
 
